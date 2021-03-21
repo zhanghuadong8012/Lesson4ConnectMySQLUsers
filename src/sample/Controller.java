@@ -6,11 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -27,35 +26,45 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<User, String> departmentColumn;
 
-    private Connection conn;
+    @FXML
+    private TextField nameTextField,emailTextField,departmentTextField;
 
-    User user = new User();
+
+    public void addUsers() throws SQLException {
+        String query = "insert into users (name, email, department) values (?, ?, ?)";
+        String name = nameTextField.getText();
+        String email = emailTextField.getText();
+        String department = departmentTextField.getText();
+        DbConnection.insertUser(query,name,email,department);
+
+        User user = new User(name, email, department);
+
+        tableView.getItems().add(user);
+
+        nameTextField.clear();
+        emailTextField.clear();
+        departmentTextField.clear();
+    }
 
 
 
     public void loadUsers() {
+        String query = "select * from users";
         ObservableList<User> list = FXCollections.observableArrayList();
-        try (ResultSet resultSet = conn.createStatement().executeQuery("select * from users")) {
-            while (resultSet.next()){
-                user.setName(resultSet.getString(2));
-                user.setEmail(resultSet.getString(3));
-                user.setDepartment(resultSet.getString(4));
-                list.add(user);
-            }
+        try {
+            list  = DbConnection.getData(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         departmentColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
 
         tableView.setItems(list);
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        conn = DbConnection.getConnection();
+        loadUsers();
     }
 }

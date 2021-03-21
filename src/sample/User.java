@@ -14,12 +14,6 @@ public class User {
         this.department = new SimpleStringProperty(department);
     }
 
-    public User() {
-        this.name = new SimpleStringProperty("");
-        this.email = new SimpleStringProperty("");
-        this.department = new SimpleStringProperty("");
-    }
-
     public String getName() {
         return name.get();
     }
