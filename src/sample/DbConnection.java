@@ -8,7 +8,7 @@ import java.sql.*;
 public class DbConnection {
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx_registration","root","zhd801215ZHD");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/javafx_registration","root","password");
     }
 
     public static ObservableList<User> getData(String query) throws SQLException {
