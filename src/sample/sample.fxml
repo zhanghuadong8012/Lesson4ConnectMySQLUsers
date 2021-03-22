@@ -24,11 +24,16 @@
                 <TableColumn fx:id="departmentColumn" prefWidth="179.0" text="DEPARTMENT" />
             </columns>
         </TableView>
-        <HBox alignment="CENTER" prefHeight="46.0" prefWidth="200.0" spacing="10.0">
-            <TextField fx:id="nameTextField" promptText="NAME"/>
-            <TextField fx:id="emailTextField" layoutX="10.0" layoutY="10.0" promptText="EMAIL"/>
-            <TextField fx:id="departmentTextField" layoutX="181.0" layoutY="10.0" promptText="DEPARTMENT"/>
-            <Button mnemonicParsing="false" onAction="#addUsers" prefHeight="46.0" prefWidth="102.0" text="Add"/>
+        <HBox alignment="TOP_CENTER" prefHeight="46.0" prefWidth="200.0" spacing="10.0">
+            <TextField fx:id="nameTextField" promptText="NAME" />
+            <TextField fx:id="emailTextField" layoutX="10.0" layoutY="10.0" promptText="EMAIL" />
+            <TextField fx:id="departmentTextField" layoutX="181.0" layoutY="10.0" promptText="DEPARTMENT" />
+         <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+            <children>
+                  <Button mnemonicParsing="false" onAction="#addUsers" prefHeight="46.0" prefWidth="102.0" text="Add" />
+               <Button mnemonicParsing="false" onAction="#refreshUsers" prefHeight="46.0" prefWidth="102.0" text="Refresh" />
+            </children>
+         </VBox>
         </HBox>
     </VBox>
 </AnchorPane>

@@ -63,6 +63,10 @@ public class Controller implements Initializable {
         tableView.setItems(list);
     }
 
+    public void refreshUsers(){
+        loadUsers();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadUsers();
